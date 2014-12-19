@@ -1,6 +1,6 @@
 #!/bin/bash -eux
 
-VER="2.1.2"
+VER="2.2.1"
 
 yum install -y wget curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
 
