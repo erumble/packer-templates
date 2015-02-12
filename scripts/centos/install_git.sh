@@ -1,6 +1,6 @@
 #!/bin/bash -eux
 
-VER="2.2.1"
+VER="2.3.0"
 
 yum install -y wget curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
 
@@ -12,8 +12,9 @@ pushd ~vagrant/git-$VER
   wget https://www.kernel.org/pub/software/scm/git/git-$VER.tar.gz
   tar -zxf git-$VER.tar.gz
   cd git-$VER
-  make prefix=/usr/local all
-  make prefix=/usr/local install
+  ./configure prefix=/usr
+  make 
+  make install 
 popd
 
 rm -rf ~vagrant/git-$VER
