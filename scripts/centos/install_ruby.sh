@@ -1,22 +1,24 @@
 #!/bin/bash -eux
 
+VER='2.2.0'
+
 yum groupinstall -y "Development Tools"
 yum install -y openssl-devel
 
-mkdir ruby-cache
-pushd ./ruby-cache
-  wget http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.2.tar.gz
-  tar -xzf ruby-2.1.2.tar.gz
-  cd ruby-2.1.2
-  ./configure
+if [[ ! -d ~vagrant/ruby-$VER ]]; then
+  mkdir -p ~vagrant/ruby-$VER
+fi
+
+pushd ~vagrant/ruby-$VER
+  wget http://cache.ruby-lang.org/pub/ruby/2.2/ruby-$VER.tar.gz
+  tar -xzf ruby-$VER.tar.gz
+  cd ruby-$VER
+  ./configure prefix=/usr
   make
   make install
 popd
 
-rm -rf ./ruby-cache
-
-echo 'export PATH=$PATH:/usr/local/bin' > ~root/.bash_profile
-source ~root/.bash_profile
+rm -rf ~vagrant/ruby-$VER
 
 if type -P gem >/dev/null 2>&1; then
   gem update --system
