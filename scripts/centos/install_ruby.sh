@@ -16,7 +16,7 @@ fi
 pushd ~vagrant/ruby-$VER
   wget http://cache.ruby-lang.org/pub/ruby/2.2/ruby-$VER.tar.gz
 
-  if [[ $(md5sum "ruby-$VER.tar.gz" != $MD5* ]]; then
+  if [[ $(md5sum "ruby-$VER.tar.gz") != $MD5* ]]; then
     echo "ruby-$VER.tar.gz has an invalid checksum. Aborting."
     exit 1
   fi
