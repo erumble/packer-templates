@@ -5,7 +5,7 @@ MD5='cd03b28fd0b555970f5c4fd481700852'
 
 # Install requisite packages
 yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel \
-  make bzip2 autoconf automake libtool bison iconv-devel
+  make bzip2 autoconf automake libtool bison 
 
 # make a temporary directory to install from
 if [[ ! -d ~vagrant/ruby-$VER ]]; then
