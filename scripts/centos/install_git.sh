@@ -2,7 +2,7 @@
 
 VER="2.3.0"
 
-yum install -y wget curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
+yum install -y wget curl-devel expat-devel gettext openssl-devel zlib-devel perl-devel 
 
 if [[ ! -d ~vagrant/git-$VER ]]; then
   mkdir -p ~vagrant/git-$VER
