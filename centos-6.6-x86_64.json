@@ -52,7 +52,7 @@
       "scripts": [
         "scripts/centos/fix-slow-dns.sh",
         "scripts/common/sshd.sh",
-	"scripts/centos/packages.sh",
+        "scripts/centos/packages.sh",
         "scripts/common/vagrant.sh",
         "scripts/centos/install_ruby.sh",
         "scripts/centos/install_git.sh",
