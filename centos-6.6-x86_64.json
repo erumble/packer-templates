@@ -52,10 +52,9 @@
       "scripts": [
         "scripts/centos/fix-slow-dns.sh",
         "scripts/common/sshd.sh",
-        "scripts/centos/packages.sh",
         "scripts/common/vagrant.sh",
-        "scripts/centos/install_ruby.sh",
         "scripts/centos/install_git.sh",
+        "scripts/centos/install_ruby.sh",
         "scripts/common/vmtools.sh",
         "scripts/common/chef.sh",
         "scripts/centos/cleanup.sh",
@@ -69,7 +68,8 @@
     "centos_version": "CentOS-6.6-x86_64",
     "centos_version_number": "6.6",
     "centos_checksum": "08be09fd7276822bd3468af8f96198279ffc41f0",
-    "mirror": "http://mirrors.kernel.org/centos"
+    "mirror_old": "http://mirrors.kernel.org/centos",
+    "mirror": "http://ftp.usf.edu/pub/centos"
   }
 }
 
