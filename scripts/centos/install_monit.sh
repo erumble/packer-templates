@@ -48,6 +48,9 @@ set pidfile /var/run/monit.pid
 
 # set id file location
 set idfile /var/.monit.id
+
+# set log file location
+set logfile /var/log/monit.log
   
 # enable web interface
 set httpd port 2812 and
@@ -56,7 +59,7 @@ set httpd port 2812 and
   allow admin:monit           # set basic auth
 
 # include all files from /etc/monit.d
-include /etc/monid.d
+include /etc/monit.d/*.conf
 EOT
 
 # set monitrc permissions according to monit documentation
