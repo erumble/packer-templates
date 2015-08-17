@@ -60,7 +60,7 @@
   "variables": {
     "vm_name": "centos-7.1",
     "ks_path": "centos-7.1",
-    "iso_mirror": "http://isoredirect.centos.org",
+    "iso_mirror": "http://mirror.fdcservers.net",
     "iso_directory": "centos/7/isos/x86_64",
     "iso_name": "CentOS-7-x86_64-DVD-1503-01.iso",
     "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
