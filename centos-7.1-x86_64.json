@@ -1,24 +1,42 @@
 {
+  "push": {
+    "name": "erumble/{{user `atlas_artifact`}}",
+    "vcs": true
+  },
+  "variables": {
+    "vm_name": "centos-7.1",
+    "ks_path": "centos-7.1",
+    "iso_mirror": "http://mirror.fdcservers.net",
+    "iso_directory": "centos/7/isos/x86_64",
+    "iso_name": "CentOS-7-x86_64-DVD-1503-01.iso",
+    "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
+    "iso_checksum_type": "sha256",
+    "box_version": "0.1.0",
+    "atlas_token": "{{env `ATLAS_TOKEN`}}",
+    "atlas_artifact": "centos71-x64"
+  },
   "builders": [
     {
+      "type": "virtualbox-iso",
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_path`}}/ks.cfg<enter><wait>"
       ],
+      "headless": true,
       "boot_wait": "10s",
       "disk_size": 20480,
-      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "guest_os_type": "RedHat_64",
       "http_directory": "http",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_url": "{{user `iso_mirror`}}/{{user `iso_directory`}}/{{user `iso_name`}}",
-      "output_directory": "packer-{{user `vm_name`}}-virtualbox",
-      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p",
+      "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
-      "ssh_username": "vagrant",
       "ssh_wait_timeout": "10000s",
-      "type": "virtualbox-iso",
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "output_directory": "packer-{{user `vm_name`}}-virtualbox",
       "vboxmanage": [
         [
           "modifyvm",
@@ -33,14 +51,7 @@
           "2"
         ]
       ],
-      "virtualbox_version_file": ".vbox_version",
       "vm_name": "packer-{{user `vm_name`}}"
-    }
-  ],
-  "post-processors": [
-    {
-      "output": "./builds/{{.Provider}}/{{user `vm_name`}}.box",
-      "type": "vagrant"
     }
   ],
   "provisioners": [
@@ -57,14 +68,23 @@
       "type": "shell"
     }
   ],
-  "variables": {
-    "vm_name": "centos-7.1",
-    "ks_path": "centos-7.1",
-    "iso_mirror": "http://mirror.fdcservers.net",
-    "iso_directory": "centos/7/isos/x86_64",
-    "iso_name": "CentOS-7-x86_64-DVD-1503-01.iso",
-    "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
-    "iso_checksum_type": "sha256"
-  }
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": false
+    },
+    {
+      "type": "atlas",
+      "only": ["virtualbox-iso"],
+      "artifact": "erumble/{{user `atlas_artifact`}}",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "created_at": "{{timestamp}}",
+        "version": "{{user `box_version`}}",
+        "provider": "virtualbox",
+        "provider_version": "{{.Version}}"
+      }
+    }
+  ]
 }
 
