@@ -4,14 +4,12 @@
     "vcs": true
   },
   "variables": {
-    "vm_name": "centos-6.7",
     "ks_path": "centos-6.7",
     "iso_mirror": "http://centos.host-engine.com",
     "iso_directory": "6.7/isos/x86_64",
     "iso_name": "CentOS-6.7-x86_64-bin-DVD1.iso",
     "iso_checksum": "c0c1a05d3d74fb093c6232003da4b22b0680f59d3b2fa2cb7da736bc40b3f2c5",
     "iso_checksum_type": "sha256",
-    "box_version": "0.1.0",
     "atlas_token": "{{env `ATLAS_TOKEN`}}",
     "atlas_artifact": "centos67-x64"
   },
@@ -53,7 +51,7 @@
     }
   ],
   "post-processors": [
-    {
+    [{
       "type": "vagrant",
       "keep_input_artifact": false
     },
@@ -63,12 +61,9 @@
       "artifact": "erumble/{{user `atlas_artifact`}}",
       "artifact_type": "vagrant.box",
       "metadata": {
-        "created_at": "{{timestamp}}",
-        "version": "{{user `box_version`}}",
-        "provider": "virtualbox",
-        "provider_version": "{{.Version}}"
+        "provider": "virtualbox"
       }
-    }
+    }]
   ]
 }
 
