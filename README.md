@@ -1,5 +1,5 @@
-####Packer file to build CentOS 6.6 Vagrant box for VirtualBox
+####Packer files to build CentOS 6.7 and 7.1 Vagrant boxes for VirtualBox
   
 Tested With  
-[Packer](https://packer.io/) v0.7.2  
-[VirtualBox](https://www.virtualbox.org/) v4.3.28
+[Packer](https://packer.io/) v0.8.5  
+[VirtualBox](https://www.virtualbox.org/) v5.0.2  
