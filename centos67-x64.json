@@ -1,0 +1,69 @@
+{
+  "push": {
+    "name": "erumble/{{user `atlas_artifact`}}",
+    "vcs": true
+  },
+  "variables": {
+    "ks_path": "centos-6.7",
+    "iso_mirror": "http://centos.host-engine.com",
+    "iso_directory": "6.7/isos/x86_64",
+    "iso_name": "CentOS-6.7-x86_64-bin-DVD1.iso",
+    "iso_checksum": "c0c1a05d3d74fb093c6232003da4b22b0680f59d3b2fa2cb7da736bc40b3f2c5",
+    "iso_checksum_type": "sha256",
+    "atlas_token": "{{env `ATLAS_TOKEN`}}",
+    "atlas_artifact": "centos67-x64"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_path`}}/ks.cfg<enter><wait>"
+      ],
+      "headless": true,
+      "boot_wait": "10s",
+      "disk_size": 20480,
+      "guest_os_type": "RedHat_64",
+      "http_directory": "http",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_url": "{{user `iso_mirror`}}/{{user `iso_directory`}}/{{user `iso_name`}}",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": [
+        "scripts/build-scripts/fix-slow-dns.sh",
+        "scripts/build-scripts/sshd.sh",
+        "scripts/build-scripts/vagrant.sh",
+        "scripts/build-scripts/vmtools.sh",
+        "scripts/build-scripts/cleanup.sh",
+        "scripts/build-scripts/minimize.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "post-processors": [
+    [{
+      "type": "vagrant",
+      "keep_input_artifact": false
+    },
+    {
+      "type": "atlas",
+      "only": ["virtualbox-iso"],
+      "artifact": "erumble/{{user `atlas_artifact`}}",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox"
+      }
+    }]
+  ]
+}
+
