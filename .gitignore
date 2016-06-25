@@ -1,4 +1,4 @@
 **/builds/*
 **/packer_cache/*
 **/.DS_Store
-
+**/*.swp

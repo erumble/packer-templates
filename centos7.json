@@ -4,14 +4,14 @@
     "vcs": true
   },
   "variables": {
-    "ks_path": "centos-6.7",
+    "ks_path": "centos7",
     "iso_mirror": "http://centos.host-engine.com",
-    "iso_directory": "6.7/isos/x86_64",
-    "iso_name": "CentOS-6.7-x86_64-bin-DVD1.iso",
-    "iso_checksum": "c0c1a05d3d74fb093c6232003da4b22b0680f59d3b2fa2cb7da736bc40b3f2c5",
+    "iso_directory": "7/isos/x86_64",
+    "iso_name": "CentOS-7-x86_64-DVD-1511.iso",
+    "iso_checksum": "907e5755f824c5848b9c8efbb484f3cd945e93faa024bad6ba875226f9683b16",
     "iso_checksum_type": "sha256",
     "atlas_token": "{{env `ATLAS_TOKEN`}}",
-    "atlas_artifact": "centos67-x64"
+    "atlas_artifact": "centos7-x64"
   },
   "builders": [
     {
@@ -40,7 +40,7 @@
     {
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
-        "scripts/build-scripts/fix-slow-dns.sh",
+        "scripts/build-scripts/networking.sh",
         "scripts/build-scripts/sshd.sh",
         "scripts/build-scripts/vagrant.sh",
         "scripts/build-scripts/vmtools.sh",
