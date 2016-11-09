@@ -44,6 +44,7 @@
         "scripts/build-scripts/sshd.sh",
         "scripts/build-scripts/vagrant.sh",
         "scripts/build-scripts/vmtools.sh",
+        "scripts/build-scripts/sudoersd.sh",
         "scripts/build-scripts/cleanup.sh",
         "scripts/build-scripts/minimize.sh"
       ],
