@@ -9,7 +9,8 @@
     "iso_checksum": "c455ee948e872ad2194bdddd39045b83634e8613249182b88f549bb2319d97eb",
     "iso_checksum_type": "sha256",
     "atlas_token": "{{env `ATLAS_TOKEN`}}",
-    "atlas_artifact": "centos7-x64"
+    "atlas_artifact": "centos7-x64",
+    "description": "None Provided"
   },
   "builders": [
     {
@@ -61,7 +62,8 @@
         "artifact": "erumble/{{user `atlas_artifact`}}",
         "artifact_type": "vagrant.box",
         "metadata": {
-          "provider": "virtualbox"
+          "provider": "virtualbox",
+          "description": "{{user `description`}}"
         }
       }
     ]
