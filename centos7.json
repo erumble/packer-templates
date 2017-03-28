@@ -5,10 +5,8 @@
   },
   "variables": {
     "ks_path": "centos7",
-    "iso_mirror": "http://centos.host-engine.com",
-    "iso_directory": "7/isos/x86_64",
-    "iso_name": "CentOS-7-x86_64-DVD-1511.iso",
-    "iso_checksum": "907e5755f824c5848b9c8efbb484f3cd945e93faa024bad6ba875226f9683b16",
+    "iso_url": "http://mirror.nodesdirect.com/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso",
+    "iso_checksum": "c455ee948e872ad2194bdddd39045b83634e8613249182b88f549bb2319d97eb",
     "iso_checksum_type": "sha256",
     "atlas_token": "{{env `ATLAS_TOKEN`}}",
     "atlas_artifact": "centos7-x64"
@@ -26,7 +24,7 @@
       "http_directory": "http",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
-      "iso_url": "{{user `iso_mirror`}}/{{user `iso_directory`}}/{{user `iso_name`}}",
+      "iso_url": "{{user `iso_url`}}",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -52,19 +50,21 @@
     }
   ],
   "post-processors": [
-    [{
-      "type": "vagrant",
-      "keep_input_artifact": false
-    },
-    {
-      "type": "atlas",
-      "only": ["virtualbox-iso"],
-      "artifact": "erumble/{{user `atlas_artifact`}}",
-      "artifact_type": "vagrant.box",
-      "metadata": {
-        "provider": "virtualbox"
+    [
+      {
+        "type": "vagrant",
+        "keep_input_artifact": false
+      },
+      {
+        "type": "atlas",
+        "only": ["virtualbox-iso"],
+        "artifact": "erumble/{{user `atlas_artifact`}}",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "virtualbox"
+        }
       }
-    }]
+    ]
   ]
 }
 
