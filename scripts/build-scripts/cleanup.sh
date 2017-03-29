@@ -34,23 +34,23 @@ if grep -q -i "release 7" /etc/redhat-release ; then
   rm -rf /var/lib/NetworkManager/*
 
   echo "==> Setup /etc/rc.d/rc.local for CentOS7"
-  cat <<-'EOF' > /etc/rc.d/rc.local
-		#BEGIN
+  cat <<-'EOF' >> /etc/rc.d/rc.local
+		#PACKER-BEGIN
 		LANG=C
 		# delete all connection
-		for con in \`nmcli -t -f uuid con\`; do
-		  if [ "\$con" != "" ]; then
-		    nmcli con del \$con
+		for con in `nmcli -t -f uuid con`; do
+		  if [ "$con" != "" ]; then
+		    nmcli con del $con
 		  fi
 		done
 		# add gateway interface connection.
-		gwdev=\`nmcli dev | grep ethernet | egrep -v 'unmanaged' | head -n 1 | awk '{print \$1}'\`
-		if [ "\$gwdev" != "" ]; then
-		  nmcli c add type eth ifname \$gwdev con-name \$gwdev
+		gwdev=`nmcli dev | grep ethernet | egrep -v 'unmanaged' | head -n 1 | awk '{print $1}'`
+		if [ "$gwdev" != "" ]; then
+		  nmcli c add type eth ifname $gwdev con-name $gwdev
 		fi
-		sed -i "/^#BEGIN/,/^#END/d" /etc/rc.d/rc.local
+		sed -i "/^#PACKER-BEGIN/,/^#PACKER-END/d" /etc/rc.d/rc.local
 		chmod -x /etc/rc.d/rc.local
-		#END
+		#PACKER-END
 		EOF
   chmod +x /etc/rc.d/rc.local
 fi
