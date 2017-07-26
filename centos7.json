@@ -43,6 +43,7 @@
         "build-scripts/vagrant.sh",
         "build-scripts/vmtools.sh",
         "build-scripts/sudoersd.sh",
+        "build-scripts/selinux.sh",
         "build-scripts/grub.sh",
         "build-scripts/cleanup.sh",
         "build-scripts/minimize.sh"
