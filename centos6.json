@@ -4,7 +4,6 @@
     "vcs": true
   },
   "variables": {
-    "ks_path": "centos6",
     "iso_mirror": "http://centos.host-engine.com",
     "iso_directory": "6/isos/x86_64",
     "iso_name": "CentOS-6.8-x86_64-bin-DVD1.iso",
@@ -17,7 +16,7 @@
     {
       "type": "virtualbox-iso",
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_path`}}/ks.cfg<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos6.cfg<enter><wait>"
       ],
       "headless": true,
       "boot_wait": "10s",
