@@ -34,15 +34,15 @@
     {
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
-        "build-scripts/networking.sh",
-        "build-scripts/sshd.sh",
-        "build-scripts/vagrant.sh",
-        "build-scripts/vmtools.sh",
-        "build-scripts/sudoersd.sh",
-        "build-scripts/selinux.sh",
-        "build-scripts/grub.sh",
-        "build-scripts/cleanup.sh",
-        "build-scripts/minimize.sh"
+        "scripts/networking.sh",
+        "scripts/sshd.sh",
+        "scripts/vagrant.sh",
+        "scripts/vmtools.sh",
+        "scripts/sudoersd.sh",
+        "scripts/selinux.sh",
+        "scripts/grub.sh",
+        "scripts/cleanup.sh",
+        "scripts/minimize.sh"
       ],
       "type": "shell"
     }
