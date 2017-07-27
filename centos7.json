@@ -1,15 +1,11 @@
 {
-  "push": {
-    "name": "erumble/{{user `atlas_artifact`}}",
-    "vcs": true
-  },
   "variables": {
     "iso_url": "http://mirror.nodesdirect.com/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso",
     "iso_checksum": "c455ee948e872ad2194bdddd39045b83634e8613249182b88f549bb2319d97eb",
     "iso_checksum_type": "sha256",
-    "atlas_token": "{{env `ATLAS_TOKEN`}}",
-    "atlas_artifact": "centos7-x64",
-    "description": "None Provided"
+    "vagrant_cloud_access_token": "{{env `VAGRANT_CLOUD_ACCESS_TOKEN`}}",
+    "description": "None Provided",
+    "version": "1.0.{{timestamp}}"
   },
   "builders": [
     {
@@ -54,18 +50,14 @@
   "post-processors": [
     [
       {
-        "type": "vagrant",
-        "keep_input_artifact": false
+        "type": "vagrant"
       },
       {
-        "type": "atlas",
-        "only": ["virtualbox-iso"],
-        "artifact": "erumble/{{user `atlas_artifact`}}",
-        "artifact_type": "vagrant.box",
-        "metadata": {
-          "provider": "virtualbox",
-          "description": "{{user `description`}}"
-        }
+        "type": "vagrant-cloud",
+        "box_tag": "erumble/centos7-x64",
+        "version": "{{user `version`}}",
+        "access_token": "{{user `vagrant_cloud_access_token`}}",
+        "version_description": "{{user `description`}}"
       }
     ]
   ]
