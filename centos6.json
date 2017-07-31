@@ -50,7 +50,8 @@
   "post-processors": [
     [
       {
-        "type": "vagrant"
+        "type": "vagrant",
+        "output": "centos6-x64.{{.Provider}}.{{isotime \"20060102-150405\"}}.box"
       },
       {
         "type": "vagrant-cloud",
