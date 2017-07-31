@@ -1,7 +1,7 @@
 {
   "variables": {
-    "iso_url": "http://centos.host-engine.com/6/isos/x86_64/CentOS-6.8-x86_64-bin-DVD1.iso",
-    "iso_checksum": "1dda55622614a8b43b448a72f87d6cb7f79de1eff49ee8c5881a7d9db28d4e35",
+    "iso_url": "http://repo1.dal.innoscale.net/centos/6.9/isos/x86_64/CentOS-6.9-x86_64-bin-DVD1.iso",
+    "iso_checksum": "d27cf37a40509c17ad70f37bc743f038c1feba00476fe6b69682aa424c399ea6",
     "iso_checksum_type": "sha256",
     "vagrant_cloud_access_token": "{{env `VAGRANT_CLOUD_ACCESS_TOKEN`}}",
     "description": "None Provided",
