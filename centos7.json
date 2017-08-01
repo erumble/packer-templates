@@ -40,7 +40,6 @@
         "scripts/vmtools.sh",
         "scripts/sudoersd.sh",
         "scripts/selinux.sh",
-        "scripts/grub.sh",
         "scripts/cleanup.sh",
         "scripts/minimize.sh"
       ],
