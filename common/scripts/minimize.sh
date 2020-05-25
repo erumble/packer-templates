@@ -19,8 +19,8 @@ rm /boot/whitespace
 set +e
 swapuuid="`/sbin/blkid -o value -l -s UUID -t TYPE=swap`";
 case "$?" in
-	2|0) ;;
-	*) exit 1 ;;
+    2|0) ;;
+    *) exit 1 ;;
 esac
 set -e
 

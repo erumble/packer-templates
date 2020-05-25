@@ -1,0 +1,76 @@
+{
+  "variables": {
+    "build_directory": "{{template_dir}}/../builds",
+    "cpus": "1",
+    "description": "None Provided",
+    "disk_size": "20480",
+    "ks_file": "centos-7.cfg",
+    "iso_url": "http://www.gtlib.gatech.edu/pub/centos/7.8.2003/isos/x86_64/CentOS-7-x86_64-DVD-2003.iso",
+    "iso_checksum": "087a5743dc6fd6706d9b961b8147423ddc029451b938364c760d75440eb7be14",
+    "iso_checksum_type": "sha256",
+    "memory": "1024",
+    "template": "centos-7.8-x86_64",
+    "vagrant_cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
+    "version": "{{timestamp}}"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<up><wait><tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_file`}}<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "cpus": "{{ user `cpus` }}",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "guest_os_type": "RedHat_64",
+      "hard_drive_interface": "sata",
+      "headless": true,
+      "http_directory": "{{template_dir}}/http",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_url": "{{user `iso_url`}}",
+      "memory": "{{ user `memory` }}",
+      "output_directory": "{{ user `build_directory` }}/packer-{{user `template`}}-virtualbox",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{ user `template` }}"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "expect_disconnect": true,
+      "scripts": [
+        "{{template_dir}}/scripts/update.sh",
+        "{{template_dir}}/../common/scripts/motd.sh",
+        "{{template_dir}}/../common/scripts/sshd.sh",
+        "{{template_dir}}/scripts/networking.sh",
+        "{{template_dir}}/../common/scripts/vagrant.sh",
+        "{{template_dir}}/../common/scripts/virtualbox.sh",
+        "{{template_dir}}/scripts/cleanup.sh",
+        "{{template_dir}}/../common/scripts/minimize.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "output": "{{ user `build_directory` }}/{{user `template`}}.{{.Provider}}.box",
+        "type": "vagrant"
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "erumble/centos7-x64",
+        "version": "{{user `version`}}",
+        "access_token": "{{user `vagrant_cloud_token`}}",
+        "version_description": "{{user `description`}}"
+      }
+    ]
+  ]
+}
