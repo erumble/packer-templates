@@ -1,4 +1,4 @@
-### Packer templates for CentOS 6 and 7
+### Packer Templates
 
 Inspired by, and heavily borrowed from [Chef Bento Boxes](https://github.com/chef/bento)
 
@@ -8,7 +8,7 @@ Inspired by, and heavily borrowed from [Chef Bento Boxes](https://github.com/che
 * [VirtualBox](https://www.virtualbox.org/)
 
 #### Hosted on [Vagrant Cloud](https://app.vagrantup.com/)
-* [CentOS 6](https://app.vagrantup.com/erumble/boxes/centos6-x64) `vagrant init erumble/centos6-x64; vagrant up`
 * [CentOS 7](https://app.vagrantup.com/erumble/boxes/centos7-x64) `vagrant init erumble/centos7-x64; vagrant up`
+* [CentOS 8](https://app.vagrantup.com/erumble/boxes/centos8-x64) `vagrant init erumble/centos8-x64; vagrant up`
 
 ###### Refer to the descriptions on Vagrant Cloud for information regarding specific versions of the software used to build these boxes.
