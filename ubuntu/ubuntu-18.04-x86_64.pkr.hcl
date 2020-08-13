@@ -5,6 +5,10 @@ locals {
   common_scripts_dir = "./../common/scripts"
   ubuntu_scripts_dir = "./scripts"
   http_dir           = "./http"
+
+  provisioner_env_vars = [
+    "HOME_DIR=/home/vagrant",
+  ]
 }
 
 source "virtualbox-iso" "ubuntu-1804" {
@@ -55,12 +59,9 @@ build {
   ]
 
   provisioner "shell" {
-    execute_command   = "echo '${var.ssh_username}' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+    execute_command   = "echo '${var.ssh_password}' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
     expect_disconnect = true
-
-    environment_vars = [
-      "HOME_DIR=/home/vagrant",
-    ]
+    environment_vars  = local.provisioner_env_vars
 
     scripts = [
       "${local.ubuntu_scripts_dir}/update.sh",
