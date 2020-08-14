@@ -1,7 +1,7 @@
 variable "build_directory" {
   description = "Output directory for vagrant box"
   type        = string
-  default     = "./../builds"
+  default     = "./builds"
 }
 
 variable "description" {
@@ -26,6 +26,21 @@ variable "iso_checksum_type" {
   description = "Installation ISO"
   type        = string
   default     = "sha256"
+}
+
+# Since the vagrant user is hardcoded in the kickstart file,
+# and since packer can't interpolate the kickstart file,
+# these shouldn't be changed from their default values.
+variable "ssh_username" {
+  description = "User in VM; used by provisioners"
+  type        = string
+  default     = "vagrant"
+}
+
+variable "ssh_password" {
+  description = "Password for ssh user"
+  type        = string
+  default     = "vagrant"
 }
 
 variable "vm_cpus" {
