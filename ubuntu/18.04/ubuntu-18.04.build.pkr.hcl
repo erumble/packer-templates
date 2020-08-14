@@ -1,6 +1,6 @@
 locals {
-  common_scripts_dir = "../../common/scripts"
-  ubuntu_scripts_dir = "../scripts"
+  common_scripts_dir = "${path.root}/../../common/scripts"
+  ubuntu_scripts_dir = "${path.root}/../scripts"
 
   provisioner_env_vars = [
     "DEBIAN_FRONTEND=noninteractive",
