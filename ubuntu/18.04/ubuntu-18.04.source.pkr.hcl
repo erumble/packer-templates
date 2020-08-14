@@ -1,7 +1,7 @@
 locals {
   preseed_file = "preseed.cfg"
   template     = "ubuntu-18.04-x86_64"
-  http_dir     = "./http"
+  http_dir     = "${path.root}/http"
 }
 
 source "virtualbox-iso" "ubuntu-1804" {

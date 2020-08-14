@@ -1,7 +1,7 @@
 variable "build_directory" {
   description = "Output directory for vagrant box"
   type        = string
-  default     = "../../builds"
+  default     = "./builds"
 }
 
 variable "description" {
