@@ -18,13 +18,13 @@ build {
     environment_vars  = local.provisioner_env_vars
 
     scripts = [
-	  "${local.centos_scripts_dir}/update.sh",	  
-	  "${local.common_scripts_dir}/scripts/sshd.sh",
-	  "${local.centos_scripts_dir}/networking.sh",
-	  "${local.common_scripts_dir}/scripts/vagrant.sh",
-	  "${local.common_scripts_dir}/scripts/virtualbox.sh",
-	  "${local.centos_scripts_dir}/cleanup.sh",
-	  "${local.common_scripts_dir}/scripts/minimize.sh"
+      "${local.centos_scripts_dir}/update.sh",
+      "${local.common_scripts_dir}/sshd.sh",
+      "${local.centos_scripts_dir}/networking.sh",
+      "${local.common_scripts_dir}/vagrant.sh",
+      "${local.common_scripts_dir}/virtualbox.sh",
+      "${local.centos_scripts_dir}/cleanup.sh",
+      "${local.common_scripts_dir}/minimize.sh",
     ]
   }
 
