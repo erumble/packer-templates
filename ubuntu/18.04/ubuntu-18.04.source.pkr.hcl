@@ -2,13 +2,7 @@ locals {
   preseed_file = "preseed.cfg"
   template     = "ubuntu-18.04-x86_64"
 
-  common_scripts_dir = "./../common/scripts"
-  ubuntu_scripts_dir = "./scripts"
-  http_dir           = "./http"
-
-  provisioner_env_vars = [
-    "HOME_DIR=/home/vagrant",
-  ]
+  http_dir = "./http"
 }
 
 source "virtualbox-iso" "ubuntu-1804" {
@@ -20,8 +14,7 @@ source "virtualbox-iso" "ubuntu-1804" {
   hard_drive_interface    = "sata"
   headless                = true
   http_directory          = local.http_dir
-  iso_checksum            = var.iso_checksum
-  iso_checksum_type       = var.iso_checksum_type
+  iso_checksum            = "${var.iso_checksum_type}:${var.iso_checksum}"
   iso_url                 = var.iso_url
   memory                  = var.vm_memory
   output_directory        = "${var.build_directory}/packer-${local.template}-virtualbox"
@@ -51,32 +44,4 @@ source "virtualbox-iso" "ubuntu-1804" {
     " -- <wait>",
     "<enter><wait>"
   ]
-}
-
-build {
-  sources = [
-    "source.virtualbox-iso.ubuntu-1804"
-  ]
-
-  provisioner "shell" {
-    execute_command   = "echo '${var.ssh_password}' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-    expect_disconnect = true
-    environment_vars  = local.provisioner_env_vars
-
-    scripts = [
-      "${local.ubuntu_scripts_dir}/update.sh",
-      "${local.common_scripts_dir}/motd.sh",
-      "${local.common_scripts_dir}/sshd.sh",
-      "${local.ubuntu_scripts_dir}/networking.sh",
-      "${local.ubuntu_scripts_dir}/sudoers.sh",
-      "${local.ubuntu_scripts_dir}/vagrant.sh",
-      "${local.common_scripts_dir}/virtualbox.sh",
-      "${local.ubuntu_scripts_dir}/cleanup.sh",
-      "${local.common_scripts_dir}/minimize.sh"
-    ]
-  }
-
-  post-processor "vagrant" {
-    output = "${var.build_directory}/${local.template}.{{.Provider}}.box"
-  }
 }
