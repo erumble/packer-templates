@@ -13,8 +13,7 @@ source "virtualbox-iso" "fedora32" {
   hard_drive_interface    = "sata"
   headless                = true
   http_directory          = local.http_dir
-  iso_checksum            = var.iso_checksum
-  iso_checksum_type       = var.iso_checksum_type
+  iso_checksum            = "${var.iso_checksum_type}:${var.iso_checksum}"
   iso_url                 = var.iso_url
   memory                  = var.vm_memory
   output_directory        = "${var.build_directory}/packer-${local.template}-virtualbox"
