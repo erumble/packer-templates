@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/bash -eux
 
 # should output one of 'redhat' 'centos' 'oraclelinux'
 distro="`rpm -qf --queryformat '%{NAME}' /etc/redhat-release | cut -f 1 -d '-'`"
@@ -50,24 +50,24 @@ if grep -q -i "release 7" /etc/redhat-release ; then
   rm -rf /var/lib/NetworkManager/*
 
   echo "==> Setup /etc/rc.d/rc.local for EL7"
-  cat <<-'EOF' >> /etc/rc.d/rc.local
-    #PACKER-BEGIN
-    LANG=C
-    # delete all connection
-    for con in `nmcli -t -f uuid con`; do
-      if [ "$con" != "" ]; then
-        nmcli con del $con
-      fi
-    done
-    # add gateway interface connection.
-    gwdev=`nmcli dev | grep ethernet | egrep -v 'unmanaged' | head -n 1 | awk '{print $1}'`
-    if [ "$gwdev" != "" ]; then
-      nmcli connection add type ethernet ifname $gwdev con-name $gwdev
-    fi
-    sed -i "/^#PACKER-BEGIN/,/^#PACKER-END/d" /etc/rc.d/rc.local
-    chmod -x /etc/rc.d/rc.local
-    #PACKER-END
-  EOF
+  cat <<'EOF' >> /etc/rc.d/rc.local
+#PACKER-BEGIN
+LANG=C
+# delete all connection
+for con in `nmcli -t -f uuid con`; do
+  if [ "$con" != "" ]; then
+    nmcli con del $con
+  fi
+done
+# add gateway interface connection.
+gwdev=`nmcli dev | grep ethernet | egrep -v 'unmanaged' | head -n 1 | awk '{print $1}'`
+if [ "$gwdev" != "" ]; then
+  nmcli connection add type ethernet ifname $gwdev con-name $gwdev
+fi
+sed -i "/^#PACKER-BEGIN/,/^#PACKER-END/d" /etc/rc.d/rc.local
+chmod -x /etc/rc.d/rc.local
+#PACKER-END
+EOF
 
   chmod +x /etc/rc.d/rc.local
 fi

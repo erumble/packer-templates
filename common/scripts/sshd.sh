@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/bash -eux
 
 SSHD_CONFIG="/etc/ssh/sshd_config"
 

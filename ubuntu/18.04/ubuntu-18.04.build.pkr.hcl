@@ -14,7 +14,7 @@ build {
   ]
 
   provisioner "shell" {
-    execute_command   = "echo '${var.ssh_password}' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'"
+    execute_command   = "echo '${var.ssh_password}' | {{.Vars}} sudo -E -S bash -eux '{{.Path}}'"
     expect_disconnect = true
     environment_vars  = local.provisioner_env_vars
 

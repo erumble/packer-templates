@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/bash -eux
 export DEBIAN_FRONTEND=noninteractive
 
 ubuntu_version="`lsb_release -r | awk '{print $2}'`";
