@@ -31,6 +31,7 @@ variable "iso_checksum_type" {
 # Since the vagrant user is hardcoded in the kickstart file,
 # and since packer can't interpolate the kickstart file,
 # these shouldn't be changed from their default values.
+# See https://github.com/hashicorp/packer/issues/9485 for more info
 variable "ssh_username" {
   description = "User in VM; used by provisioners"
   type        = string
