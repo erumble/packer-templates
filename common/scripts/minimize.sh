@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/bash -eux
 
 case "$PACKER_BUILDER_TYPE" in
   qemu) exit 0 ;;
