@@ -13,13 +13,13 @@ variable "description" {
 variable "iso_url" {
   description = "Installation ISO"
   type        = string
-  default     = "http://cdimage.ubuntu.com/ubuntu/releases/18.04.4/release/ubuntu-18.04.4-server-amd64.iso"
+  default     = "http://cdimage.ubuntu.com/ubuntu/releases/18.04/release/ubuntu-18.04.5-server-amd64.iso"
 }
 
 variable "iso_checksum" {
   description = "Installation ISO"
   type        = string
-  default     = "e2ecdace33c939527cbc9e8d23576381c493b071107207d2040af72595f8990b"
+  default     = "8c5fc24894394035402f66f3824beb7234b757dd2b5531379cb310cedfdf0996"
 }
 
 variable "iso_checksum_type" {
