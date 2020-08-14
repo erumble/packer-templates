@@ -1,15 +1,15 @@
 {
   "variables": {
-    "build_directory": "{{template_dir}}/../builds",
+    "build_directory": "{{template_dir}}/../../builds",
     "cpus": "1",
     "description": "None Provided",
     "disk_size": "20480",
-    "ks_file": "centos-7.cfg",
-    "iso_url": "http://www.gtlib.gatech.edu/pub/centos/7.8.2003/isos/x86_64/CentOS-7-x86_64-DVD-2003.iso",
-    "iso_checksum": "087a5743dc6fd6706d9b961b8147423ddc029451b938364c760d75440eb7be14",
+    "ks_file": "centos-8.cfg",
+    "iso_url": "http://www.gtlib.gatech.edu/pub/centos/8.1.1911/isos/x86_64/CentOS-8.1.1911-x86_64-dvd1.iso",
+    "iso_checksum": "3ee3f4ea1538e026fff763e2b284a6f20b259d91d1ad5688f5783a67d279423b",
     "iso_checksum_type": "sha256",
     "memory": "1024",
-    "template": "centos-7.8-x86_64",
+    "template": "centos-8.1-x86_64",
     "vagrant_cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
     "version": "{{timestamp}}"
   },
@@ -46,14 +46,14 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
-        "{{template_dir}}/scripts/update.sh",
-        "{{template_dir}}/../common/scripts/motd.sh",
-        "{{template_dir}}/../common/scripts/sshd.sh",
-        "{{template_dir}}/scripts/networking.sh",
-        "{{template_dir}}/../common/scripts/vagrant.sh",
-        "{{template_dir}}/../common/scripts/virtualbox.sh",
-        "{{template_dir}}/scripts/cleanup.sh",
-        "{{template_dir}}/../common/scripts/minimize.sh"
+        "{{template_dir}}/../scripts/update.sh",
+        "{{template_dir}}/../../common/scripts/motd.sh",
+        "{{template_dir}}/../../common/scripts/sshd.sh",
+        "{{template_dir}}/../scripts/networking.sh",
+        "{{template_dir}}/../../common/scripts/vagrant.sh",
+        "{{template_dir}}/../../common/scripts/virtualbox.sh",
+        "{{template_dir}}/../scripts/cleanup.sh",
+        "{{template_dir}}/../../common/scripts/minimize.sh"
       ],
       "type": "shell"
     }
@@ -66,7 +66,7 @@
       },
       {
         "type": "vagrant-cloud",
-        "box_tag": "erumble/centos7-x64",
+        "box_tag": "erumble/centos8-x64",
         "version": "{{user `version`}}",
         "access_token": "{{user `vagrant_cloud_token`}}",
         "version_description": "{{user `description`}}"
