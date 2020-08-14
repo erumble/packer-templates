@@ -13,13 +13,13 @@ variable "description" {
 variable "iso_url" {
   description = "Installation ISO"
   type        = string
-  default     = ""
+  default     = "http://www.gtlib.gatech.edu/pub/centos/8.2.2004/isos/x86_64/CentOS-8.2.2004-x86_64-dvd1.iso"
 }
 
 variable "iso_checksum" {
   description = "Installation ISO"
   type        = string
-  default     = ""
+  default     = "c87a2d81d67bbaeaf646aea5bedd70990078ec252fc52f5a7d65ff609871e255"
 }
 
 variable "iso_checksum_type" {
