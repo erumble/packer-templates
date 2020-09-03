@@ -30,7 +30,16 @@ build {
     ]
   }
 
-  post-processor "vagrant" {
-    output = "${var.build_directory}/${local.template}.{{.Provider}}.box"
+  post-processors {
+    post-processor "vagrant" {
+      output = "${var.build_directory}/${local.template}.{{.Provider}}.box"
+    }
+
+    post-processor "vagrant-cloud" {
+      access_token        = var.vagrant_cloud_token
+      box_tag             = "erumble/fedora32-x64"
+      version             = var.version
+      version_description = var.description
+    }
   }
 }
